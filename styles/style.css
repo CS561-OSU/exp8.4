@@ -78,7 +78,7 @@
     left: 0px; 
     width: 100%; /* 100% of width of screen */
     align-items: center;
-    z-index: 100; /* Force it to be on top */
+    z-index: 200; /* Force it to be on top */
 }
 
 /* navbar-right-item styles items within navbar that should be right-justified.
@@ -122,7 +122,7 @@
    It should be text color in a large font.
 */
 .navbar-title {
-    margin: 14px 0px 14px 4px;
+    margin: 0px 0px 0px 4px;
     color: var(--text-color);
     font-size: 26px;  
 }
@@ -130,12 +130,19 @@
 /* navbar-profile-pic styles the user's profile picture 
    that appears in the navbar 
 */
+.navbar-profile-btn {
+    margin-left: 8px;
+    margin-right: 8px;
+    height: 44px;
+    width: 44px;
+    background-image: url("../images/DefaultProfilePic.jpg");
+    background-size: cover;
+    flex-shrink: 0;
+}
+
 .navbar-profile-pic {
-    cursor: pointer;
-    height: 46px;
-    width: auto;
-    margin-left: 16px;
-} 
+    background-size: cover;
+}
 
 /*************************************************************************
 * CSS CLASSES FOR SIDE MENU
@@ -182,10 +189,10 @@
 /* .modetab -- Style the container enclosing the mode tabs */
 .modetab-container {
     position: fixed;
-    top: 62px;
+    top: 60px;
     left: 0px;
     width: 100%;
-    z-index: 50;
+    z-index: 150;
     display: flex; 
 }
     
@@ -198,10 +205,10 @@
     font-variant: small-caps;
     width: 25%;
     text-align: center;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     cursor: pointer;
-}   
+}      
 
 /* .modetab-selected -- Style the selected mode tab */
 .modetab-selected {
@@ -244,7 +251,7 @@
 
 .mode-page-btn {
     display: inline;
-    font-size: 18px;
+    font-size: 36px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -259,7 +266,7 @@
 /* Float-btn -- Styling for the floating action button. */
 .float-btn {
     position:fixed;
-    width: 120px;
+    width: 136px;
     height: 40px;
     bottom: 20px;
     right: 20px;

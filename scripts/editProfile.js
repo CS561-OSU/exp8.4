@@ -197,7 +197,7 @@
     //Reset form in case it is visited again
     resetUpdateProfileForm();
     //Transition back to previous mode page
-    GlobalProfileBtnImg.setAttribute("src",GlobalUserData.identityInfo.profilePic);	
+    GlobalProfileBtn.style.backgroundImage = "url(" + GlobalUserData.identityInfo.profilePic + ")";
     transitionFromDialog(GlobalProfileSettingsDialog);
 }
 
