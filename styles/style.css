@@ -260,6 +260,18 @@
     cursor: pointer;
 }
 
+.mode-page-btn-cancel {
+    display: inline;
+    font-size: 36px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: var(--text-color);
+    background-color: var(--main-red-color);
+    cursor: pointer;
+}
+    
 /*************************************************************************
 * CSS CLASSES FOR FLOATING ACTION BUTTON
 *************************************************************************/
