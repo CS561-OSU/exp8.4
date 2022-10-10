@@ -27,5 +27,9 @@
             keyDownDialogFocused(e);
     } else if (GlobalCreateAccountDialog.contains(document.activeElement)) {
         keyDownCreateDialogFocused(e);
-    }  
+    }  else if (GlobalProfileSettingsDialog.contains(document.activeElement)) {
+        keyDownUpdateDialogFocused(e);
+    } else if (GlobalRoundsModeDialog.contains(document.activeElement)) {
+        keyDownRoundDialogFocused(e);
+    }
  });

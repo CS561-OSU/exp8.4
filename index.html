@@ -100,6 +100,14 @@
       <div id="roundsModeTab" class="mode-page hidden" role="tabpanel"
            aria-label="Rounds Tab" tabindex="0">
         <h1 class="mode-page-header">Rounds</h1>
+        <div id="roundUpdated" class="toast-container hidden" role="alert" aria-atomic="true" aria-live="assertive">
+          <div id="roundUpdatedMsg" class="toast-text">
+            New round was logged
+          </div>
+          <button id="roundUpdatedClose" type="button" class="btn-close toast-close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
         <table id="roundsTable" class="table table-hover">
           <thead class="table-light">
             <th scope="col">Date</th>
@@ -755,6 +763,7 @@
     <script src="scripts/login.js"></script>
     <script src="scripts/createAccount.js"></script>
     <script src="scripts/editProfile.js"></script>
+    <script src="scripts/roundsMode.js"></script>
     <script src="scripts/document.js"></script>
   </body>
 </html>

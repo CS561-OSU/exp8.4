@@ -181,6 +181,60 @@ const GlobalFirstFocusableUpdateProfileItem = (() => {
   return Object.freeze(Store)
 })()
 
+/*****************************************************/
+/* LOG ROUND DIALOG FORM                             */
+/*****************************************************/
+const GlobalRoundsModeDialog = document.getElementById("roundsModeDialog");
+const GlobalRoundFormHeader = document.getElementById("roundFormHeader");
+const GlobalRoundFormSubmitBtn = document.getElementById("roundFormSubmitBtn");
+const GlobalRoundFormSubmitBtnLabel = document.getElementById("roundFormSubmitBtnLabel");
+const GlobalRoundFormSubmitBtnIcon = document.getElementById("roundFormSubmitBtnIcon");
+const GlobalLogRoundForm = document.getElementById("logRoundForm");
+const GlobalRoundErrBox = document.getElementById("roundErrorBox");
+const GlobalRoundDateErr = document.getElementById("roundDateError");
+const GlobalRoundCourseErr = document.getElementById("roundCourseError");
+const GlobalRoundStrokesErr = document.getElementById("roundStrokesError");
+const GlobalRoundMinutesErr = document.getElementById("roundMinutesError");
+const GlobalRoundSecondsErr = document.getElementById("roundSecondsError");
+const GlobalRoundNotesErr = document.getElementById("roundNotesError");
+const GlobalRoundDate = document.getElementById("roundDate");
+const GlobalRoundCourse = document.getElementById("roundCourse");
+const GlobalRoundType = document.getElementById("roundType");
+const GlobalRoundHoles = document.getElementById("roundHoles");
+const GlobalRoundStrokes = document.getElementById("roundStrokes");
+const GlobalRoundMinutes = document.getElementById("roundMinutes");
+const GlobalRoundSeconds = document.getElementById("roundSeconds");
+const GlobalRoundSGS = document.getElementById("roundSGS");
+const GlobalRoundNotes = document.getElementById("roundNotes");
+const GlobalFirstFocusableLogRoundItem = (() => {
+  let _firstFocusedLogRoundItem = GlobalRoundDate
+  const Store = {
+      get: () => _firstFocusedLogRoundItem,
+      set: val => (_firstFocusedLogRoundItem = val)
+  }
+  return Object.freeze(Store)
+})()
+
+GlobalRoundDate.valueAsNumber = 
+Date.now()-(new Date()).getTimezoneOffset()*60000;
+
+/*****************************************************/
+/* LOG ROUND DIALOG FORM TOAST                       */
+/*****************************************************/
+const GlobalRoundUpdatedClose = document.getElementById("roundUpdatedClose");
+const GlobalRoundUpdated = document.getElementById("roundUpdated");
+const GlobalRoundUpdatedMsg = document.getElementById("roundUpdatedMsg");
+
+/*****************************************************/
+/* ROUNDS MODE TABLE                                 */
+/*****************************************************/
+const GlobalRoundsTable = document.getElementById("roundsTable");
+const GlobalRoundsTableCaption = document.getElementById("roundsTableCaption");
+const GlobalRoundsTableSortableColHeaders = document.getElementsByClassName('sortable-header');
+const GlobalRoundsTableSortBtns = document.getElementsByClassName('table-sort-btn');
+const GlobalRoundsTableHeaderColLabels = ['date','course','score'];
+const GlobalRoundsTableSortIcons = document.getElementsByClassName('sort-icon');
+
 /*************************************************************************
  * @function transitionToDialog
  * @desc 
