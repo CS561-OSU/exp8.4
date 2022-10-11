@@ -153,6 +153,8 @@ function logRound() {
     JSON.stringify(GlobalUserData));
   //Reset form to prepare for next visit
   resetLogRoundForm();
+  //Add new round to table
+  addRoundToTable(GlobalUserData.rounds.length-1)
   //Transition back to mode page
   GlobalRoundUpdatedMsg.textContent = "New Round Logged!";
   GlobalRoundUpdated.classList.remove("hidden");
@@ -252,6 +254,39 @@ GlobalLogRoundForm.addEventListener("submit",function(e) {
     GlobalRoundDateErr.classList.add("hidden");
 }
 });
+
+/*************************************************************************
+* @function addRoundToTable 
+* @desc 
+* Adds a new round to the "Rounds" table.
+* After adding a row to the table, calls writeRoundToTable() to write data.
+* @param roundIndex: index in userData.rounds of round to add
+* @global GlobalUserData: the current user's data object
+*************************************************************************/
+function addRoundToTable(roundIndex) {
+    const roundId = GlobalUserData.rounds[roundIndex].roundNum;
+    if (GlobalRoundsTable.rows[1].innerHTML.includes ("colspan")) {
+      //empty table! Remove this row before adding new one
+      GlobalRoundsTable.deleteRow(1);
+    }
+    //Write new row containing new round to table body
+    const thisRoundBody = GlobalRoundsTable.querySelector("tbody");
+    const thisRound = thisRoundBody.insertRow(0); //insert as first table row
+    thisRound.id = "r-" + roundId; //set unique id of  row so we can access it later
+    thisRound.innerHTML = "<td>" + GlobalUserData.rounds[roundIndex].date + "</td><td>" +
+      GlobalUserData.rounds[roundIndex].course + "</td><td>" + 
+      GlobalUserData.rounds[roundIndex].SGS + " (" + GlobalUserData.rounds[roundIndex].strokes +
+      " in " + GlobalUserData.rounds[roundIndex].minutes + ":" + 
+      GlobalUserData.rounds[roundIndex].seconds + 
+      ")</td>" +
+      "<td><button aria-label='View and Edit Round'" + 
+      "onclick='editRound(" + roundId + ")'><span class='fas fa-eye'>" +
+      "</span>&nbsp;<span class='fas fa-edit'></span></button></td>" +
+      "<td><button aria-label='Delete Round'" + 
+      "onclick='confirmDelete(" + roundId + ")'>" +
+      "<span class='fas fa-trash'></span></button></td>";
+}
+  
 
 /*************************************************************************
 * @function keyDownRoundDialogFocused 
