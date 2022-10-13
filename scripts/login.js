@@ -60,6 +60,8 @@
     resetLoginForm();
     //2. Place user acct data of logged in user in global JS object
     GlobalUserData = JSON.parse(localStorage.getItem(userId));
+    //3. Populate the "Rounds" table
+    populateRoundsTable();
     //2. Reset state of app with user logged in.
     GlobalLoginPage.classList.add("hidden");
     GlobalModeTabsContainer.classList.remove("hidden");

@@ -56,27 +56,73 @@ function prepLogRoundForm() {
     }
   }
 
- 
+  /*************************************************************************
+ * @function prepEditRoundForm 
+ * @desc 
+ * Prepares the round form to edit an existing round by setting the app's
+ * title, and the form button's label and icon.
+ * and button label to "Log Round," and by setting the button's icon
+ * @global GlobalRoundFormHeader: Form's H1 element
+ * @global GlobalRoundFormSubmitBtnLabel: Form's button label
+ * @global GlobalRoundFormSubmitBtnIcon: Form's button icon
+ *************************************************************************/
+function prepEditRoundForm() {
+    GlobalRoundFormHeader.textContent = "Edit Round";
+    GlobalRoundFormSubmitBtnLabel.innerHTML = "&nbsp;Update Round";
+    if (GlobalRoundFormSubmitBtnIcon.classList.contains("fa-save")) {
+      GlobalRoundFormSubmitBtnIcon.classList.remove("fa-save");
+    }
+    if (!GlobalRoundFormSubmitBtnIcon.classList.contains("fa-edit")) {
+      GlobalRoundFormSubmitBtnIcon.classList.add("fa-edit");
+    }
+}
+
+/*************************************************************************
+ * @function fillRoundForm 
+ * @desc 
+ * Prepares the round form for editing by filling it with the data on the
+ * round to be edited. 
+ * @param round: An object containing the round data
+ * @global GlobalRoundDate: Form's date field
+ * @global GlobalRoundCourse: Form's course field
+ * @global GlobalRoundType: Form's type field
+ * @global GlobalRoundStrokes: Form's strokes field
+ * @global GlobalRoundMinutes: Form's minutes field
+ * @global GlobalRoundSeconds: Form's seconds field
+ * @global GlobalRoundSGS: Form's Speedgolf Score field
+ * @global GlobalRoundNotes: Form's notes field
+ *************************************************************************/
+ function fillRoundForm(round) {
+  GlobalRoundDate.value = round.date;
+  GlobalRoundCourse.value = round.course;
+  GlobalRoundType.value = round.type;
+  GlobalRoundHoles.value = round.holes;
+  GlobalRoundStrokes.value = round.strokes;
+  GlobalRoundMinutes.value = round.minutes;
+  GlobalRoundSeconds.value = round.seconds;
+  GlobalRoundSGS.value = round.SGS;
+  GlobalRoundNotes.value = round.notes;
+}
 
   /*************************************************************************
  * @function resetLogRoundForm 
  * @Desc 
  * When the user exits the "Log Round" Dialog, reset the form to
  * show blank data and default values
- * @global roundDate: Form's date field
- * @global roundCourse: Form's course field
- * @global roundType: Form's type field
- * @global roundStrokes: Form's strokes field
- * @global roundMinutes: Form's minutes field
- * @global roundSeconds: Form's seconds field
- * @global roundSGS: Form's Speedgolf Score field
- * @global roundNotes: Form's notes field
- * @global roundsErrBox: <div> containing the error messages
- * @global roundCourseErr: Error message for course field
- * @global roundStrokesErr: Error message for strokes field
- * @global roundMinutesErr: Error message for minutes field
- * @global roundSecondsErr: Error message for seconds  field
- * @global roundNotesErr: Error message for notes field
+ * @global GlobalRoundDate: Form's date field
+ * @global GlobalRoundCourse: Form's course field
+ * @global GlobalRoundType: Form's type field
+ * @global GlobalRoundStrokes: Form's strokes field
+ * @global GlobalRoundMinutes: Form's minutes field
+ * @global GlobalRoundSeconds: Form's seconds field
+ * @global GlobalRoundSGS: Form's Speedgolf Score field
+ * @global GlobalRoundNotes: Form's notes field
+ * @global GlobalRoundsErrBox: <div> containing the error messages
+ * @global GlobalRoundCourseErr: Error message for course field
+ * @global GlobalRoundStrokesErr: Error message for strokes field
+ * @global GlobalRoundMinutesErr: Error message for minutes field
+ * @global GlobalRoundSecondsErr: Error message for seconds  field
+ * @global GlobalRoundNotesErr: Error message for notes field
  *************************************************************************/
 function resetLogRoundForm() {
   //Set date to today.
@@ -110,6 +156,32 @@ function resetLogRoundForm() {
 GlobalRoundUpdatedClose.addEventListener("click",function() {
   GlobalRoundUpdated.classList.add("hidden");
 });
+
+/*************************************************************************
+* @function editRound 
+* @desc 
+* Set to click handler of "View/Edit" button associated with each row of
+* "Rounds" table. Sets up the round mode form to enable users to view and
+* edit the data on the round on which they clicked, then transitions to
+* the round mode form modal dialog. The index of the round being edited
+* is saved to the global variable roundIndex so that data on this round
+* can be saved when the form is submitted. 
+* @param roundId the unique id of the round that was clicked by the user
+* @global GlobalUserData: object containing the current user's data
+*************************************************************************/
+function editRound(roundId) {
+  //Find current array index of this round
+  let roundIndex;
+  for (roundIndex = 0; roundIndex < GlobalUserData.rounds.length; ++roundIndex) {
+    if (GlobalUserData.rounds[roundIndex].roundNum === roundId) {
+      break;
+    }
+  }
+  //Populate form with round data to be edited.
+  fillRoundForm(GlobalUserData.rounds[roundIndex]);
+  //Display dialog
+  transitionToDialog(GlobalRoundsModeDialog,"SpeedScore: Edit Round",prepEditRoundForm);
+}
 
 /*************************************************************************
 * @function logRound 
@@ -170,12 +242,12 @@ function logRound() {
 * call the logRound() function, passing in the round data
 * @global createAccountForm: the <form> element whose 
 *         SUBMIT handler is triggered
-* @global GlobalRoundDate, the field containing the round date
-* @global GlobalRoundCourse, the course of the round
-* @global GlobalRoundStrokes, the number of strokes taken in the round
-* @global GlobalRoundMinutes, the number of minutes taken in the round
-* @global GlobalRoundSeconds, the number of seconds taken in teh round
-* @global GlobalRoundNotes, the notes on the round
+* @global GlobalRoundDate: the field containing the round date
+* @global GlobalRoundCourse: the course of the round
+* @global GlobalRoundStrokes: the number of strokes taken in the round
+* @global GlobalRoundMinutes: the number of minutes taken in the round
+* @global GlobalRoundSeconds: the number of seconds taken in teh round
+* @global GlobalRoundNotes: the notes on the round
 *************************************************************************/
 GlobalLogRoundForm.addEventListener("submit",function(e) {
   e.preventDefault(); //Prevent default submit behavior
@@ -258,10 +330,10 @@ GlobalLogRoundForm.addEventListener("submit",function(e) {
 /*************************************************************************
 * @function addRoundToTable 
 * @desc 
-* Adds a new round to the "Rounds" table.
-* After adding a row to the table, calls writeRoundToTable() to write data.
+* Adds a new round to the "Rounds" table, updating the caption
 * @param roundIndex: index in userData.rounds of round to add
 * @global GlobalUserData: the current user's data object
+* @global GlobalRoundsTableCaption: The table's caption
 *************************************************************************/
 function addRoundToTable(roundIndex) {
     const roundId = GlobalUserData.rounds[roundIndex].roundNum;
@@ -285,8 +357,26 @@ function addRoundToTable(roundIndex) {
       "<td><button aria-label='Delete Round'" + 
       "onclick='confirmDelete(" + roundId + ")'>" +
       "<span class='fas fa-trash'></span></button></td>";
+      GlobalRoundsTableCaption.textContent = "Table displaying " + GlobalUserData.rounds.length + " speedgolf rounds";
 }
   
+/*************************************************************************
+* @function populateRoundsTable 
+* @desc 
+* Iterate through the userData.rounds array, adding a row corresponding
+* to each round stored in the array. 
+* @global userData: object containing the current user's data
+*************************************************************************/
+function populateRoundsTable() {
+    for (let i = 0; i < GlobalUserData.rounds.length; ++i) {
+      addRoundToTable(i);
+    }
+    if (GlobalUserData.rounds.length == 1) {
+      GlobalRoundsTableCaption.textContent = "Table displaying 1 speedgolf round";
+    } else {
+      GlobalRoundsTableCaption.textContent = "Table displaying " + GlobalUserData.rounds.length + " speedgolf rounds";
+    }
+  }
 
 /*************************************************************************
 * @function keyDownRoundDialogFocused 

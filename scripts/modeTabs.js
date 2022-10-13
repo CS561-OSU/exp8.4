@@ -29,6 +29,8 @@
     //Switch tab panel
     GlobalModeTabPanels[GlobalCurrentMode.get()].classList.add("hidden");
     GlobalModeTabPanels[newMode].classList.remove("hidden");
+    //Switch app title
+    document.title = "SpeedScore: " + GlobalModeNames[newMode];
     GlobalCurrentMode.set(newMode); //Change mode
     GlobalFocusedMode.set(newMode); //Change focused mode
 }

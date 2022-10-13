@@ -248,13 +248,15 @@ const GlobalRoundsTableSortIcons = document.getElementsByClassName('sort-icon');
  * document.title
  * @param dialog: A reference to the HTML element containing the dialog;
  * it will be shown by removing the "hidden" class 
+ * @param dialogPrepFunc: A reference to a function to call to prepare 
+ * the dialog's appearance.
  * @global GlobalSkipLink: The skip link
  * @global GlobalMenuBtn: The menu button
  * @global GlobalModeTabsContainer: The mode tabs
  * @global GlobalModeTabPanels: array of tab panels 
  * @global GlobalCurrentMode, index of current mode.
  *************************************************************************/
- function transitionToDialog(dialog, dialogTitle) {
+ function transitionToDialog(dialog, dialogTitle, dialogPrepFunc) {
   GlobalSkipLink.classList.add("hidden"); 
   GlobalMenuBtn.classList.add("hidden");
   GlobalSearchBtn.classList.add("hidden");
@@ -262,6 +264,7 @@ const GlobalRoundsTableSortIcons = document.getElementsByClassName('sort-icon');
   GlobalModeTabsContainer.classList.add("hidden");
   GlobalModeTabPanels[GlobalCurrentMode.get()].classList.add("hidden");
   document.title = dialogTitle;
+  dialogPrepFunc();
   dialog.classList.remove("hidden");
 }
 
