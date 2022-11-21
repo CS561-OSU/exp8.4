@@ -19,21 +19,22 @@
  * each mode's dialog box
  *************************************************************************/
  for (let i = 0; i < GlobalModeActionButtons.length; ++i) {
-    GlobalModeActionButtons[i].addEventListener("click",function(e) {
-    //Hide tab panel
-    GlobalModeTabPanels[GlobalCurrentMode.get()].classList.add("hidden");
-    //Hide and disable all UI elements
-    GlobalMenuBtn.classList.add("disabled");
-    GlobalSearchBtn.classList.add("disabled");
-    GlobalProfileBtn.classList.add("disabled");
-    GlobalSkipLink.classList.add("hidden"); 
-    GlobalModeTabsContainer.classList.add("disabled");
-    //Show dialog box
-    GlobalModeActionDialogs[GlobalCurrentMode.get()].classList.remove("hidden");
-    //Set focus to dialog box's action button
-    GlobalDialogActionButtons[GlobalCurrentMode.get()].focus();
-    });
-}
+    GlobalModeActionButtons[i].addEventListener("click",
+        () => transitionToDialog(GlobalModeActionDialogs[i],GlobalDialogTitles[i],GlobalDialogPrepFuncs[i]));
+  };
+    // //Hide tab panel
+    // GlobalModeTabPanels[GlobalCurrentMode.get()].classList.add("hidden");
+    // //Hide and disable all UI elements
+    // GlobalMenuBtn.classList.add("disabled");
+    // GlobalSearchBtn.classList.add("disabled");
+    // GlobalProfileBtn.classList.add("disabled");
+    // GlobalSkipLink.classList.add("hidden"); 
+    // GlobalModeTabsContainer.classList.add("disabled");
+    // //Show dialog box
+    // GlobalModeActionDialogs[GlobalCurrentMode.get()].classList.remove("hidden");
+    // //Set focus to dialog box's action button
+    // GlobalDialogActionButtons[GlobalCurrentMode.get()].focus();
+    //});
 
 /*************************************************************************
  * @function Dialog Box Action Button CLICK handler 

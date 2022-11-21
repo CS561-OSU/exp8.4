@@ -138,8 +138,8 @@
  *         dialog
  *************************************************************************/
  GlobalProfileBtn.addEventListener("click", function(e) {
-    transitionToDialog(GlobalProfileSettingsDialog, "Edit Account and Profile");
-    populateProfileSettingsForm();
+    transitionToDialog(GlobalProfileSettingsDialog, "Edit Account and Profile",populateProfileSettingsForm);
+    //populateProfileSettingsForm();
     GlobalProfileEmailField.focus();
 });
 
@@ -162,7 +162,7 @@
             clubsInBag[GlobalProfileClubsInBagChecks[i].name] = true;
         }
     }
-    oldUserEmail = GlobalUserData.accountInfo.email;
+    const oldUserEmail = GlobalUserData.accountInfo.email;
     GlobalUserData = {
         accountInfo: {
             email: GlobalProfileEmailField.value, 
@@ -185,7 +185,9 @@
                 course: GlobalProfileBestCourseField.value},
             clubs: clubsInBag,
             clubComments: GlobalProfileClubCommentsField.value
-        }
+        },
+        rounds: [...GlobalUserData.rounds],
+        roundCount: GlobalUserData.roundCount
     };
     //Save updated profile to localStorage as key-value pair
     localStorage.setItem(GlobalUserData.accountInfo.email, 
@@ -287,4 +289,11 @@
     } else {
         GlobalProfileEmailErr.classList.add("hidden");
     }
+ });
+
+ cancelUpdateProfileBtn.addEventListener("click", function(e) {
+    //Reset form in case it is visited again
+    resetUpdateProfileForm();
+    //Transition back to previous mode page
+    transitionFromDialog(GlobalProfileSettingsDialog);
  });

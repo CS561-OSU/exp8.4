@@ -83,6 +83,7 @@ const GlobalDialogCancelButtons =
 /* SEARCH BUTTON, PROFILE BUTTON, SKIP LINK, MODE TABS */
 /*******************************************************/
 const GlobalSearchBtn = document.getElementById("searchBtn");
+const GlobalSearchBox = document.getElementById("searchBox");
 const GlobalProfileBtn = document.getElementById("profileBtn");
 const GlobalProfileBtnImg = document.getElementById("profileBtnImg")
 const GlobalSkipLink = document.getElementById("sLink");
@@ -234,6 +235,10 @@ const GlobalRoundsTableSortableColHeaders = document.getElementsByClassName('sor
 const GlobalRoundsTableSortBtns = document.getElementsByClassName('table-sort-btn');
 const GlobalRoundsTableHeaderColLabels = ['date','course','score'];
 const GlobalRoundsTableSortIcons = document.getElementsByClassName('sort-icon');
+
+const GlobalDialogPrepFuncs = [()=>{}, ()=>prepLogRoundForm(), ()=>{}, ()=>{}];
+const GlobalDialogTitles = ["SpeedScore: Post to Feed","SpeedScore: Log Round",
+  "SpeedScore: Add Course","SpeedScore: Find Buddies"];
 
 /*************************************************************************
  * @function transitionToDialog
