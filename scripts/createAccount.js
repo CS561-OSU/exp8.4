@@ -140,7 +140,7 @@ function createAccount() {
     document.title = "Log In to SpeedScore";
     GlobalCreateAccountDialog.classList.add("hidden");
     GlobalLoginPage.classList.remove("hidden");
-    GlobalAccountCreatedEmail.textContent = newAcct.email;
+    GlobalAccountCreatedEmail.textContent = newAcct.accountInfo.email;
     GlobalAccountCreated.classList.remove("hidden");
 }
 
